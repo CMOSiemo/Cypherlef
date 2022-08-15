@@ -85,13 +85,70 @@ def encrypt(lan, text, key)
 
 end
 
-def validate_language(input)
+def invalid_input_msg(lan = nil)
 
-  #input validation
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nOpción ingresada no válida. Por favor vuelve a intentarlo"
+  
+  elsif lan == CODEBASE_EN
+
+    puts "\nInvalid input, please try again"
+
+  else
+    puts "\nOpción ingresada no válida. Por favor vuelve a intentarlo
+Invalid input, please try again"
+
+  end
+
+end
+
+def welcome_msg(lan = nil)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nWena shoro!!! Bienvenido a Cypherlef!!!"
+    
+  elsif lan == CODEBASE_EN
+  
+    puts "\nWelcome to your friendly neighbourhood Cypherlef!!!"
+  
+  else puts "\nWena shoro!!! Bienvenido a Cypherlef!!!
+Welcome to your friendly neighbourhood Cypherlef!!!\n"
+  
+  end
+
+end
+
+def language_request_msg(lan = nil)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nPor favor elige tu lenguaje\n1. Español\n2. English\n"
+  
+  elsif lan == CODEBASE_EN
+
+    puts "\nPlease select your language\n1. Español\n2. English\n"
+
+  else puts "\nPor favor elige tu lenguaje\nPlease select your language
+1. Español\n2. English\n"
+
+  end
+
+end
+
+def validate_language(input, lan = nil)
+
+  #Input validation
   if input != "1" && input != "2"
 
-    puts "\nInvalid input, please Try Again. Select your language by typing in your option's number: \n\n1. Español\n2. English\n"
-    validate_language(gets.chomp)
+    #Retry
+    invalid_input_msg(lan)
+    language_request_msg(lan)
+    validate_language(gets.chomp, lan = nil)
 
   #Spanish
   elsif input == "1"
@@ -107,16 +164,109 @@ def validate_language(input)
 
 end
 
-def validate_key(input)
+def language_selected_msg(lan)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nLenguaje seleccionado: Español"
+  
+  elsif lan == CODEBASE_EN
+
+    puts "\nLanguage selected: English"
+  
+  end
+
+end
+
+def text_request_msg(lan)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+  puts "\nPor favor ingresa el mensaje a encriptar:\n"
+  
+  elsif lan == CODEBASE_EN
+
+  puts "\nPlease input the message you wish to encrypt:\n"
+  
+  end
+
+end
+
+def key_request_msg(lan)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+  puts "\nIngresa la llave de encriptación, puede ser un entero negativo o positivo\n"
+  
+  elsif lan == CODEBASE_EN
+
+  puts "\nPlease enter the encryption key, it may be any negative or positive integer\n"
+  
+  end
+
+end
+
+def validate_key(lan, input)
 
   #Input validation
   if input.gsub(/\s+/, "").to_i.to_s == input
 
     return input.to_i
 
-  else puts "Invalid input, please Try Again. \n\nPlease enter the encryption key, it may be any negative or positive integer\n"
+  #Input request
+  else invalid_input_msg(lan)
+    key_request_msg(lan)
+    validate_key(lan, gets.chomp)
 
-    validate_key(gets.chomp)
+  end
+
+end
+
+def encrypting_text_msg(lan, key)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nEcriptando el texto con llave: #{key}, por favor espera\n\n"
+      
+  elsif lan == CODEBASE_EN
+    
+    puts "\nEncrypting text with key: #{key}, please wait\n\n"
+
+  end
+      
+end
+
+def final_msg(lan)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nEcriptación completa. Quieres encriptar otro texto?
+\n1. Sí\n2. Cambiar lenguaje\n3. Salir\n"
+      
+  elsif lan == CODEBASE_EN
+    
+    puts "\nEncryption completed. Do you wish to have another go?
+\n1. Yes\n2. Change language\n3. Exit\n"
+
+  end
+
+end
+
+def goodbye_msg(lan)
+
+  #Message according to selected language
+  if lan == CODEBASE_ES
+
+    puts "\nVuelve pronto!!! <(^^<)"
+      
+  elsif lan == CODEBASE_EN
+    
+    puts "\nCome again soon!!! <(^^<)"
 
   end
 
@@ -127,7 +277,9 @@ def validate_menu_option(lan, input)
   #Input validation
   if input != "1" && input != "2" && input != "3"
 
-    puts "\nInvalid input, please Try Again. Do you wish to encrypt another text? \n\n1. Yes\n2. Change language\n3. Exit\n"
+    #Input request
+    invalid_input_msg(lan)
+    final_msg(lan)
     validate_menu_option(lan, gets.chomp)
 
   #Retry without changing language
@@ -135,15 +287,18 @@ def validate_menu_option(lan, input)
 
     main(lan)
 
-  #Retry and change lanuage
+  #Retry and change language
   elsif input == "2"
 
-    main
+    language_request_msg(lan)
+    holder = validate_language(gets.chomp, lan)
+    language_selected_msg(holder)
+    main(holder)
 
   #Exit
   elsif input == "3"
 
-    puts "\nCome again soon!!!"
+    goodbye_msg(lan)
 
   end
 
@@ -154,30 +309,30 @@ def main(lan = nil)
   unless lan
 
     #CHEEEEEEEEEEEEEERS!!!!!!!!!
-    puts "\nWelcome to your friendly neighbourhood Caesar's Cypherman!!!\n\n
-    Please select your language: \n\n1. Español\n2. English\n"
-    
+    welcome_msg
+    #Request language selection
+    language_request_msg
     lan = validate_language(gets.chomp)
+    language_selected_msg(lan)
 
   end
 
-  puts "\nLanguage selected: #{lan[:name]}\n\nPlease input the message you wish to encrypt: \n\n"
+  text_request_msg(lan)
 
   #Fetching text
   text = gets.chomp
 
-  puts "\n\nPlease enter the encryption key, it may be any negative or positive integer\n\n"
+  key_request_msg(lan)
 
   #Fetching key
-  key = validate_key(gets.chomp)
+  key = validate_key(lan, gets.chomp)
 
-  puts "\n\nEncrypting text with key: #{key}\n\nEncrypted text:\n\n"
+  encrypting_text_msg(lan, key)
 
   #Ensambling
   puts encrypt(lan, text, key)
 
-  puts "\n\nEncryption completed. Do you wish to have another go? \n\n1. Yes\n2. Change language\n3. Exit\n"
-
+  final_msg(lan)
   #Final menu
   validate_menu_option(lan, gets.chomp)
 
@@ -186,4 +341,4 @@ end
 #Run main method
 main
 
-#By Claudio Martínez Ortiz 14/08/2022 V1.0
+#By Claudio Martínez Ortiz 14/08/2022 V1.01
