@@ -1,3 +1,4 @@
+#Copyright (c) 2022 Claudio Martínez Ortiz
 
 #Languages supported
 CODEBASE_ES = {name: "Español", chars: 27, lower: [97, 98, 99, 100, 101,

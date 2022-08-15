@@ -9,3 +9,5 @@
 ## Technologies Used
 
 * _Ruby_
+
+Copyright (c) 2022 Claudio Martínez Ortiz
