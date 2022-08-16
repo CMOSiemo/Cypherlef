@@ -2,6 +2,7 @@
 
 #### By _**Claudio Martínez Ortiz**_
 
+
 ## Description
 
 #### _Terminal application that encodes text by a given key, supports spanish language_
