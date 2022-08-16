@@ -11,7 +11,6 @@
     $ ruby caesar_cypher.rb
 #### _Then follow instructions_
 
-
 ## Technologies Used
 
 * _Ruby_
