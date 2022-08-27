@@ -285,15 +285,16 @@ def validate_menu_option(lan, input)
 end
 
 def welcome(lan = nil)
-  unless lan
+  if lan
 
+  else
     # CHEEEEEEEEEEEEEERS!!!!!!!!!
     welcome_msg
     # Request language selection
     language_request_msg
     lan = validate_language(gets.chomp)
     language_selected_msg(lan)
-
+    main(lan)
   end
 end
 
