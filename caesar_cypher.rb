@@ -276,6 +276,7 @@ def validate_menu_option(lan, input)
   when '3'
 
     goodbye_msg(lan)
+    exit(0)
 
   else
 
@@ -322,5 +323,4 @@ end
 
 # Run main method
 main
-
 # By Claudio Martínez Ortiz 14/08/2022 V1.01
