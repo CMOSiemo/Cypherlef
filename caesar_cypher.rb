@@ -248,6 +248,7 @@ def goodbye_msg(lan)
     puts "\nCome again soon!!! <(^^<)"
 
   end
+  exit(0)
 end
 
 def change_language(lan)
@@ -276,7 +277,6 @@ def validate_menu_option(lan, input)
   when '3'
 
     goodbye_msg(lan)
-    exit(0)
 
   else
 
