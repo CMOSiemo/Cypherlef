@@ -1,5 +1,7 @@
 # Copyright (c) 2022 Claudio Martínez Ortiz
 
+# frozen_string_literal: true
+
 # Languages supported
 CODEBASE_ES = { name: 'Español', chars: 27,
                 lower: [97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 241, 111, 112, 113, 114,
